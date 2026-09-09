@@ -28,9 +28,9 @@ type Store = {
 const seed: Challenge[] = [
   {
     id: "school-crossing",
-    title: "Unsafe crossings near school",
+    title: "Unsafe school crossing",
     description: "Children cross a fast-moving road outside the school every day. There is no visible zebra crossing, and buses often stop close to the gate during peak hours.",
-    location: "Koramangala, Bengaluru",
+    location: "Kanke, Ranchi",
     category: "Safety",
     severity: "Critical",
     voices: 18,
@@ -42,9 +42,9 @@ const seed: Challenge[] = [
   },
   {
     id: "water-access",
-    title: "Summer water gaps",
+    title: "Irregular drinking-water supply",
     description: "Residents walk long distances for reliable water access during peak summer months. The existing pipeline covers only 40% of the colony.",
-    location: "Dharavi, Mumbai",
+    location: "Madhupur, Deoghar",
     category: "Water",
     severity: "High",
     voices: 32,
@@ -55,10 +55,10 @@ const seed: Challenge[] = [
     aiConfidence: 91,
   },
   {
-    id: "ewaste",
-    title: "E-waste has no home",
-    description: "Electronic waste accumulates in open lots with no proper collection or recycling infrastructure nearby.",
-    location: "Viman Nagar, Pune",
+    id: "sanitation",
+    title: "Blocked community drainage",
+    description: "Open drains remain blocked after rain, creating standing water near homes and a primary school.",
+    location: "Jharia, Dhanbad",
     category: "Environment",
     severity: "Medium",
     voices: 12,
@@ -69,10 +69,10 @@ const seed: Challenge[] = [
     aiConfidence: 87,
   },
   {
-    id: "streetlight",
-    title: "Dark streets after 7 PM",
-    description: "Multiple streetlights on the main road between the bus stop and residential colony are non-functional for weeks.",
-    location: "HSR Layout, Bengaluru",
+    id: "street-lighting",
+    title: "Unlit bus-stop approach",
+    description: "A heavily used evening route between the bus stop and residential lanes has non-functional street lighting.",
+    location: "Bokaro Steel City, Bokaro",
     category: "Infrastructure",
     severity: "Medium",
     voices: 24,
@@ -83,10 +83,10 @@ const seed: Challenge[] = [
     aiConfidence: 89,
   },
   {
-    id: "waste-segregation",
-    title: "No waste segregation system",
-    description: "The ward has no door-to-door waste collection and no segregation system, leading to open dumping.",
-    location: "Aundh, Pune",
+    id: "waste-collection",
+    title: "Missed waste collection",
+    description: "Households report inconsistent collection and open dumping near a community playground.",
+    location: "Mango, Jamshedpur",
     category: "Environment",
     severity: "High",
     voices: 15,
@@ -101,17 +101,20 @@ const seed: Challenge[] = [
 const StoreContext = createContext<Store | null>(null);
 
 export function DemoStore({ children }: { children: ReactNode }) {
-  const [challenges, setChallenges] = useState<Challenge[]>(seed);
+  const [challenges, setChallenges] = useState<Challenge[]>(() => {
+    if (typeof window === "undefined") return seed;
+    try {
+      const saved = localStorage.getItem("samarth-demo-challenges");
+      return saved ? JSON.parse(saved) : seed;
+    } catch {
+      return seed;
+    }
+  });
   const [notifications, setNotifications] = useState<string[]>([
     "3 partners matched your school-crossing challenge",
     "Your weekly impact pulse has increased",
     "Water access project moved to pilot stage",
   ]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("samarth-demo-challenges");
-    if (saved) setChallenges(JSON.parse(saved));
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("samarth-demo-challenges", JSON.stringify(challenges));

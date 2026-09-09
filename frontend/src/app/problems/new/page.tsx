@@ -18,7 +18,7 @@ export default function RaiseChallenge() {
     addChallenge({
       title: desc.length > 55 ? desc.slice(0, 55) + "\u2026" : desc,
       description: desc,
-      location: location || "Koramangala, Bengaluru",
+      location: location || "Kanke, Ranchi",
       category: "Community need",
     });
     setSent(true);
@@ -117,7 +117,7 @@ export default function RaiseChallenge() {
                   <input
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="e.g. Koramangala, Bengaluru"
+                    placeholder="e.g. Kanke, Ranchi"
                     className="mt-2 w-full rounded-xl border border-border bg-muted px-4 py-3 text-sm outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
                   />
 
@@ -157,7 +157,7 @@ export default function RaiseChallenge() {
                     </div>
                     <div className="rounded-xl bg-muted p-4">
                       <p className="text-xs font-bold text-muted-foreground">Location</p>
-                      <p className="mt-1 text-sm">{location || "Koramangala, Bengaluru"}</p>
+                      <p className="mt-1 text-sm">{location || "Kanke, Ranchi"}</p>
                     </div>
                     <div className="rounded-xl bg-muted p-4">
                       <p className="text-xs font-bold text-muted-foreground">Evidence</p>

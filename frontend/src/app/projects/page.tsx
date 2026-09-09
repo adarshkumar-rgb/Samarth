@@ -6,7 +6,7 @@ import { AnimatedBar, Stagger, CountUp } from "@/components/samarth/animated";
 const projects = [
   {
     title: "Water, within walking distance",
-    area: "Dharavi · Mumbai",
+    area: "Madhupur · Deoghar",
     progress: 72,
     days: "9 days to pilot",
     color: "from-cyan-500 to-blue-500",
@@ -23,7 +23,7 @@ const projects = [
   },
   {
     title: "Safe routes to school",
-    area: "Koramangala · Bengaluru",
+    area: "Kanke · Ranchi",
     progress: 48,
     days: "Research in progress",
     color: "from-amber-500 to-orange-500",

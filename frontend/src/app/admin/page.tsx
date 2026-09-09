@@ -5,9 +5,9 @@ import { AppShell, StatusPill } from "@/components/samarth/app-shell";
 import { CountUp, AnimatedBar, Stagger } from "@/components/samarth/animated";
 
 const initialQueue = [
-  { id: "q1", title: "Street lights around the bus stop", location: "HSR Layout, Bengaluru", evidence: 3, voices: 24, severity: "Medium" as const },
-  { id: "q2", title: "Plastic dumping near lake", location: "Aundh, Pune", evidence: 5, voices: 15, severity: "High" as const },
-  { id: "q3", title: "Unsafe crossings near school", location: "Koramangala, Bengaluru", evidence: 8, voices: 18, severity: "Critical" as const },
+  { id: "q1", title: "Unlit bus-stop approach", location: "Bokaro Steel City, Bokaro", evidence: 3, voices: 24, severity: "Medium" as const },
+  { id: "q2", title: "Missed waste collection", location: "Mango, Jamshedpur", evidence: 5, voices: 17, severity: "High" as const },
+  { id: "q3", title: "Unsafe school crossing", location: "Kanke, Ranchi", evidence: 9, voices: 26, severity: "Critical" as const },
 ];
 
 const analytics = [

@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { DM_Mono, DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/samarth/providers";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-heading",
+const display = Playfair_Display({
+  variable: "--font-display-source",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const inter = Inter({
+const sans = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
+const mono = DM_Mono({ variable: "--font-mono-source", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
   title: "Samarth — Turn community needs into measurable impact",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${display.variable} ${mono.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
       </body>

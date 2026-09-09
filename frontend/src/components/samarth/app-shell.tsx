@@ -6,14 +6,15 @@ import { useTheme } from "next-themes";
 import {
   Bell, ChevronRight, CircleHelp, Command, LayoutDashboard,
   Lightbulb, Map, Menu, Moon, Network, Plus, Search, ShieldCheck,
-  Sparkles, Sun, University, X,
+  Sparkles, University, X,
 } from "lucide-react";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { useDemo } from "./demo-store";
 import { PulseDot } from "./animated";
 
 const navigation = [
   { href: "/dashboard", label: "Command centre", icon: LayoutDashboard },
+  { href: "/map", label: "Problem map", icon: Map },
   { href: "/problems/new", label: "Raise a challenge", icon: Plus },
   { href: "/matches", label: "AI matches", icon: Network },
   { href: "/projects", label: "Live projects", icon: Lightbulb },
@@ -29,39 +30,31 @@ export function AppShell({
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [alertsOpen, setAlertsOpen] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
   const { notifications, clearNotifications, challenges } = useDemo();
 
-  useEffect(() => {
-    setDark(theme === "dark");
-  }, [theme]);
-
   const toggleTheme = () => {
-    const next = dark ? "light" : "dark";
+    const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    setDark(!dark);
   };
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-foreground">
       {/* ── Sidebar ── */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-[272px] flex-col border-r border-border bg-white/95 px-4 py-5 backdrop-blur-xl transition-transform duration-300 dark:bg-[#0d1422]/95 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-[272px] flex-col border-r border-border bg-[var(--background)] px-4 py-5 transition-transform duration-300 lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Logo */}
         <div className="mb-9 flex items-center justify-between px-2">
           <Link href="/" className="flex items-center gap-3">
-            <span className="grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-500 text-lg font-black text-white shadow-lg shadow-indigo-500/30">
-              S
-            </span>
+            <span className="grid size-10 place-items-center bg-foreground text-lg font-black text-background">S</span>
             <span>
               <b className="block text-lg tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>Samarth</b>
-              <small className="text-xs font-medium text-muted-foreground">Impact operating system</small>
+              <small className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">Impact network</small>
             </span>
           </Link>
           <button onClick={() => setOpen(false)} className="lg:hidden text-muted-foreground">
@@ -80,7 +73,7 @@ export function AppShell({
                 href={href}
                 className={`group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition-all duration-200 ${
                   active
-                    ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/25"
+                    ? "bg-foreground text-background"
                     : "text-muted-foreground hover:bg-accent hover:text-foreground"
                 }`}
               >
@@ -95,16 +88,16 @@ export function AppShell({
         </nav>
 
         {/* Help card */}
-        <div className="rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 p-4 text-white shadow-xl shadow-indigo-500/20">
+          <div className="border border-border p-4">
           <div className="mb-2 flex items-center gap-2 text-sm font-bold">
             <CircleHelp size={17} /> Need a hand?
           </div>
-          <p className="text-xs leading-5 text-indigo-100">
+          <p className="text-xs leading-5 text-muted-foreground">
             Your guided tour explains every step in plain language.
           </p>
           <button
             onClick={() => setTourOpen(true)}
-            className="mt-3 text-xs font-bold underline underline-offset-4 hover:text-white/80 transition-colors"
+            className="mt-3 text-xs font-bold underline underline-offset-4 transition-colors"
           >
             Start tour
           </button>
@@ -123,7 +116,7 @@ export function AppShell({
       {/* ── Main area ── */}
       <main className="min-h-screen lg:pl-[272px]">
         {/* Header */}
-        <header className="sticky top-0 z-20 flex h-[76px] items-center gap-4 border-b border-border bg-[var(--background)]/80 px-5 backdrop-blur-xl md:px-8">
+        <header className="sticky top-0 z-20 flex h-[76px] items-center gap-4 border-b border-border bg-[var(--background)] px-5 md:px-8">
           <button onClick={() => setOpen(true)} className="lg:hidden text-foreground">
             <Menu />
           </button>
@@ -146,7 +139,7 @@ export function AppShell({
               aria-label="Toggle colour theme"
               className="grid size-10 place-items-center rounded-xl border border-border bg-card text-muted-foreground transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
             >
-              {dark ? <Sun size={18} /> : <Moon size={18} />}
+              <Moon size={18} />
             </button>
 
             <button
@@ -175,7 +168,7 @@ export function AppShell({
         <div className="mx-auto max-w-[1440px] px-5 py-7 md:px-8">
           <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="mb-1 text-xs font-bold uppercase tracking-[0.16em] text-indigo-600 dark:text-indigo-400">
+              <p className="eyebrow mb-1 text-muted-foreground">
                 {eyebrow}
               </p>
               <h1
